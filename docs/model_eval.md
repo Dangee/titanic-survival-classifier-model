@@ -41,10 +41,23 @@ Final list of features: <br>
 
 ### Model Evaluation 
 Using a 20% test sample, the following models were evaluated, with Random Forest providing the highest prediction accuracy:
-![model_comparison_chart](model_comparison_chart.png)
+![model_comparison_chart](model_comparison_chart.png)<br>
 ![model_metrics_comparison](model_metrics_comparison.jpg)
 
+#### Final model metrics
+![final_model_metrics](final_model_metrics.png)
+```
+precision:	80.4% - how often is yes prediction correct - TP/(TP + FP)
+recall:	        86.0% - how often predict yes when the answer is actually yes 
+                        TP/(TP + FN) 
+f1 score:	83.1% - precision and recall combined
+accuracy:	82.4% - how often is the model correct - (TP + TN)/TOTAL
+error rate:	17.6% - reverse of accuracy, how often the model is incorrect 
+                        (FP + FN)/TOTAL
+ROC-AUC:	82.3% - Area Under the Curve, ability of the model to distinguish
+                        between positive and negative
+```
 
-
-Github code:
-* (Model Evaluation Jupyter Notebook)[]
+### Github code
+* [Model Evaluation Jupyter Notebook](https://github.com/Dangee/titanic-survival-classifier-model/blob/main/titanic-eda.ipynb)
+* [Data source](https://www.kaggle.com/c/titanic)
