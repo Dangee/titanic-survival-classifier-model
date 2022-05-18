@@ -1,2 +1,6 @@
 site_name: Titanic Survival Prediction Model
-site_url: 
+site_url: https://Dangee.github.io/titanic-survival-classifier-model/
+nav:
+    - Home: index.md
+    - About: about.md
+theme: windmill
