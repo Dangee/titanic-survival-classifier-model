@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="None">
+    
+    <link rel="canonical" href="https://github.com/Dangee/titanic-survival-classifier-model/">
+    <link rel="shortcut icon" href="./img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Titanic Survival Prediction Model</title>
+    <link href="./css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="./css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="./css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/bootstrap-3.3.7.min.js"></script>
+    <script src="./js/highlight.pack.js"></script>
+    
+      <script src="./js/elasticlunr.min.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '.';
+      var is_top_frame = (window === window.parent);
+        
+        var pageToc = [
+          {title: "Titanic Survival Classifier", url: "#_top", children: [
+              {title: "Model balancing", url: "#model-balancing" },
+              {title: "Feature selection", url: "#feature-selection" },
+              {title: "Model Evaluation", url: "#model-evaluation" },
+              {title: "Final model metrics", url: "#final-model-metrics" },
+              {title: "Github code", url: "#github-code" },
+          ]},
+        ];
+
+    </script>
+    <script src="./js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<nav class="navbar wm-page-top-frame">
+  <div class="container-fluid wm-top-container">
+    
+    <div class="wm-top-tool pull-right wm-vcenter">
+      <form class="dropdown wm-vcentered" id="wm-search-form" action="./search.html">
+        
+        <button id="wm-search-show" class="btn btn-sm btn-default" type="submit"
+          ><i class="fa fa-search" aria-hidden="true"></i></button>
+
+        <div class="input-group input-group-sm wm-top-search">
+          <input type="text" name="q" class="form-control" id="mkdocs-search-query" placeholder="Search" autocomplete="off">
+          <span class="input-group-btn" role="search">
+            
+            <button class="btn btn-default dropdown-toggle collapse" data-toggle="dropdown" type="button"><span class="caret"></span></button>
+            <ul id="mkdocs-search-results" class="dropdown-menu dropdown-menu-right"></ul>
+            <button id="wm-search-go" class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
+    </div>
+
+    
+    <div class="wm-top-tool wm-vcenter pull-right wm-small-left">
+      <button id="wm-toc-button" type="button" class="btn btn-sm btn-default wm-vcentered"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+    </div>
+
+    
+    
+
+    
+    <a href="" class="wm-top-brand wm-top-link wm-vcenter">
+      
+      <div class="wm-top-title">
+        Titanic Survival Prediction Model<br>
+        
+      </div>
+    </a>
+  </div>
+</nav>
+
+  <div id="main-content" class="wm-page-top-frame">
+    
+<nav class="wm-toc-pane">
+  
+  <ul class="wm-toctree">
+        <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">Home</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="about/" class="wm-article-link wm-toc-text">About</a>
+</li>
+  </ul>
+</nav>
+
+    <div class="wm-content-pane">
+      <iframe class="wm-article" name="article"></iframe>
+    </div>
+  </div>
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="about/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="about/" class="btn btn-xs btn-link">
+        About
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="titanic-survival-classifier">Titanic Survival Classifier</h1>
+<p>Model analysis to improve prediction. </p>
+<h2 id="model-balancing">Model balancing</h2>
+<p>Source data set:</p>
+<pre><code>RangeIndex: 712 entries, 0 to 711
+Data columns (total 8 columns):
+ #   Column    Non-Null Count  Dtype  
+---  ------    --------------  -----  
+ 0   Survived  712 non-null    int64  
+ 1   Pclass    712 non-null    int64  
+ 2   Sex       712 non-null    object 
+ 3   Age       712 non-null    float64
+ 4   Fare      712 non-null    float64
+ 5   Embarked  712 non-null    object 
+ 6   Name      712 non-null    object 
+ 7   SibSp     712 non-null    int64  
+
+Note: SibSp = Number of Siblings and Spouse
+</code></pre>
+<p>Target variable: Survived (1 = True, 0 = False), with the following counts:</p>
+<pre><code>0 =  424
+1 =  288
+</code></pre>
+<p>In order to provide a more balanced data set, oversampled survived by duplicating 136 randomly selected records from the Survived data set. </p>
+<h2 id="feature-selection">Feature selection</h2>
+<ol>
+<li>Converted Age to age bins. Increase age bins from 4 to 7 bins, to test impact of model accuracy. </li>
+<li>Parsed out title from full name as its own variable. Converted to common titles Miss, Mrs. and Mr., and bundled the remaining titles as VIP. About 3% of sample records were classified as VIP.</li>
+<li>Used <code>dummies</code> pandas function to convert the following features:<br> <code>Sex, Pclass, Embarked, SibSp, age_binned</code></li>
+<li>Reviewed correlation matrix of features to survival rate, and retained for the final model features with a coefficient with an absolute value greater than 0.1.  </li>
+</ol>
+<p>Final list of features: <br>
+<code>'Fare', 'Name', 'female', 'male', 'Cabin Class 1', 'Cabin Class 3', 'Cherbourg', 'Southampton', 'SibSp_0', 'SibSp_1', 'Age (18, 25]', 'Mr.', 'Mrs.', 'Miss'</code></p>
+<h2 id="model-evaluation">Model Evaluation</h2>
+<p>Using a 20% test sample, the following models were evaluated, with Random Forest providing the highest prediction accuracy:
+<img alt="model_comparison_chart" src="model_comparison_chart.png" /><br>
+<img alt="model_metrics_comparison" src="model_metrics_comparison.jpg" /></p>
+<h2 id="final-model-metrics">Final model metrics</h2>
+<p><img alt="final_model_metrics" src="final_model_metrics.png" /></p>
+<ul>
+<li>precision:    80.4% - how often is yes prediction correct - TP/(TP + FP)</li>
+<li>recall:           86.0% - how often predict yes when the answer is actually yes  TP/(TP + FN) </li>
+<li>f1 score: 83.1% - precision and recall combined</li>
+<li>accuracy: 82.4% - how often is the model correct - (TP + TN)/TOTAL</li>
+<li>error rate:   17.6% - reverse of accuracy, how often the model is incorrect (FP + FN)/TOTAL</li>
+<li>ROC-AUC:  82.3% - Area Under the Curve, ability of the model to distinguish between positive and negative</li>
+</ul>
+<h2 id="github-code">Github code</h2>
+<ul>
+<li><a href="https://github.com/Dangee/titanic-survival-classifier-model/blob/main/titanic-eda.ipynb">Model Evaluation Jupyter Notebook</a></li>
+<li><a href="https://www.kaggle.com/c/titanic">Data source</a></li>
+</ul>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="about/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="about/" class="btn btn-xs btn-link">
+        About
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
+<!--
+MkDocs version : 1.3.0
+Build Date UTC : 2022-05-18 16:32:20.837115+00:00
+-->
