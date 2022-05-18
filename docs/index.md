@@ -35,12 +35,12 @@ In order to provide a more balanced data set, oversampled survived by duplicatin
 1. Converted Age to age bins. Increase age bins from 4 to 7 bins, to test impact of model accuracy. 
 2. Parsed out title from full name as its own variable. Converted to common titles Miss, Mrs. and Mr., and bundled the remaining titles as VIP. About 3% of sample records were classified as VIP.
 3. Used `dummies` pandas function to convert the following features:<br> `Sex, Pclass, Embarked, SibSp, age_binned `
-4. Reviewed correlation matrix of features to survival rate, and retained for the final model features with a coefficient with an absolute value greater than 0.1.  
+4. Reviewed correlation matrix of features to survival rate, and retained for the final model features with a coefficient with an absolute value greater than 0.09.  
 
 ![survival_correlation_metrics](survival correlation metrics.jpg)
 
 Final list of features: <br>
-`'Fare', 'Name', 'female', 'male', 'Cabin Class 1', 'Cabin Class 3', 'Cherbourg', 'Southampton', 'SibSp_0', 'SibSp_1', 'Age (18, 25]', 'Mr.', 'Mrs.', 'Miss'`
+`'Fare', 'female', 'male', 'Cabin Class 1', 'Cabin Class 3', 'Cherbourg', 'Southampton', 'SibSp_0', 'SibSp_1', 'Age (18, 25]', 'Mr.', 'Mrs.', 'Miss'`
 
 ## Model Evaluation 
 Using a 20% test sample, the following models were evaluated, with Random Forest providing the highest prediction accuracy:
