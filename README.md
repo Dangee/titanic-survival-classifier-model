@@ -5,6 +5,7 @@ Evaluation of the Titanic survival classification model.
 Model evaluation results create as GitDoc document.
 
 Github repo: [https://dangee.github.io/titanic-survival-classifier-model/](https://github.com/Dangee/titanic-survival-classifier-model)
+
 Model evaluation notebook `titanic-eda.ipynb`.
 
 Notes:
